@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "cdb0c27f-e49f-47e0-bbe6-ee53affde89f",
+		"name": "starzplay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4999035"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "session_id",
+						"value": "fltsvma5kjjnp6lckj29i8swu0iy1qd1",
+						"type": "text"
+					},
+					{
+						"key": "csrf_token",
+						"value": "Sam0D4L18uBnbR3CQd0Z8Rzvz4zdOCmuvb3Ahtj2rxZ9Xt3tyC0hH4TbjffWh95m",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"paymentMethods\": [\n        {\n            \"name\": \"second\",\n            \"displayName\": \"Alfa Lebanon\",\n            \"paymentType\": \"MOBILE_CARRIER\",\n            \"paymentPlans\": [\n                {\n                    \"id\": 54,\n                    \"netAmount\": 5.99,\n                    \"taxAmount\": 0,\n                    \"grossAmount\": 5.99,\n                    \"currency\": \"USD\",\n                    \"duration\": \"Month\"\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1.0/configuration/payment-methods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1.0",
+						"configuration",
+						"payment-methods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"paymentMethods\": [\n    {\n      \"name\": \"xxxxxx\",\n      \"displayName\": \"xxxxxx\",\n      \"paymentType\": \"MOBILE_CARRIER\",\n      \"paymentPlans\": [\n        {\n          \"id\": 72,\n          \"netAmount\": 5.99,\n          \"taxAmount\": 0,\n          \"grossAmount\": 5.99,\n          \"currency\": \"USD\",\n          \"duration\": \"Month\"\n        }\n      ]\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1.0/configuration/payment-methods?payment-methods=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1.0",
+						"configuration",
+						"payment-methods"
+					],
+					"query": [
+						{
+							"key": "payment-methods",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

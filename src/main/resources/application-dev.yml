@@ -1,0 +1,34 @@
+server:
+  port: 8080
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /mydb
+  datasource:
+    url: jdbc:h2:~/version-1.0.3;DB_CLOSE_ON_EXIT=FALSE;schema=public
+    username: payment
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hinernate:
+        dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: none
+    generate-ddl: false
+  liquibase:
+    default-schema: public
+    change-log: db/changelog/db.changelog-master.xml
+    drop-first: true
+#logging:
+#  level:
+#    org.springframework: INFO
+#    com.starzplay: INFO
+#  pattern:
+#    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+#    file: "%d %p %c{1.} [%t] %m%n"
+  file:
+    name: payment-application-dev.log
+  messages:
+    basename: messages
