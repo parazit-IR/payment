@@ -8,7 +8,6 @@ import com.starzplay.video.payment.mapper.MapStructMapper;
 import com.starzplay.video.payment.model.PaymentMethodAllModel;
 import com.starzplay.video.payment.model.PaymentMethodAllModelInput;
 import com.starzplay.video.payment.repository.PaymentMethodRepository;
-import com.starzplay.video.payment.repository.PaymentPlanRepository;
 import com.starzplay.video.payment.validator.PaymentValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,13 +24,13 @@ import static com.starzplay.video.payment.exception.PaymentExceptionType.PAYMENT
 public class PaymentMethodService {
 
     private final PaymentMethodRepository paymentMethodRepository;
-    private final PaymentPlanRepository paymentPlanRepository;
     private final MapStructMapper mapStructMapper;
     private final PaymentValidator paymentValidator;
 
-    public PaymentMethodService(PaymentMethodRepository paymentMethodRepository, PaymentPlanRepository paymentPlanRepository, MapStructMapper mapStructMapper, PaymentValidator paymentValidator) {
+    public PaymentMethodService(PaymentMethodRepository paymentMethodRepository,
+                                MapStructMapper mapStructMapper,
+                                PaymentValidator paymentValidator) {
         this.paymentMethodRepository = paymentMethodRepository;
-        this.paymentPlanRepository = paymentPlanRepository;
         this.mapStructMapper = mapStructMapper;
         this.paymentValidator = paymentValidator;
     }
@@ -44,17 +43,17 @@ public class PaymentMethodService {
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentMethodAllModel> filter(String name) {
+    public List<PaymentMethodAllModel> filterByName(String name) {
         List<PaymentMethodAllModel> paymentMethodAllModels = mapStructMapper.paymentMethodsToPaymentMethodAllModels(paymentMethodRepository.findAllByName(name));
         log.debug("Filter paymentMethodAllModels : {}", paymentMethodAllModels);
         return paymentMethodAllModels;
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentMethodAllModel> filter(Long paymentPlanId) {
-        PaymentPlan paymentPlan1 = new PaymentPlan();
-        paymentPlan1.setId(paymentPlanId);
-        List<PaymentMethod> paymentMethods = paymentMethodRepository.getReferenceByPaymentPlansIs(paymentPlan1);
+    public List<PaymentMethodAllModel> filterById(Long paymentPlanId) {
+        PaymentPlan plan = new PaymentPlan();
+        plan.setId(paymentPlanId);
+        List<PaymentMethod> paymentMethods = paymentMethodRepository.getReferenceByPaymentPlansIs(plan);
         List<PaymentMethodAllModel> paymentMethodAllModels = mapStructMapper.paymentMethodsToPaymentMethodAllModels(paymentMethods);
         log.debug("Filter paymentMethodAllModels : {}", paymentMethodAllModels);
         return paymentMethodAllModels;

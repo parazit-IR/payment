@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.starzplay.video.payment.enums.Currency;
 import com.starzplay.video.payment.enums.Duration;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 
@@ -18,6 +17,9 @@ import java.util.*;
 @Table(name = "payment_plan")
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Audited
 @AuditOverride(forClass = Auditable.class)
 public class PaymentPlan extends Auditable {

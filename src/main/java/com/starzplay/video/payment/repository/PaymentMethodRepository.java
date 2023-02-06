@@ -16,17 +16,7 @@ import java.util.List;
 @Repository
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Long> {
 
-
-//    @Override
-//    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"paymentPlans"})
-//    <S extends PaymentMethod> List<S> saveAll(Iterable<S> entities);
-
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"paymentPlans"})
     List<PaymentMethod> findAllByName(String name);
-
-    @Override
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"paymentPlans"})
-    List<PaymentMethod> findAllById(Iterable<Long> longs);
 
     boolean existsByNameAndDisplayNameAndPaymentTypeAndPaymentPlansIn(String name, String displayName, PaymentType paymentType, List<PaymentPlan> paymentPlans);
 

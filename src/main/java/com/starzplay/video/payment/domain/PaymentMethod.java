@@ -1,17 +1,25 @@
 package com.starzplay.video.payment.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.starzplay.video.payment.enums.PaymentType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+
+@NamedEntityGraph(name = "payment-method-graph-with-payment-plans",
+        attributeNodes = {@NamedAttributeNode("name"), @NamedAttributeNode("displayName"), @NamedAttributeNode("paymentType"), @NamedAttributeNode(value = "paymentPlans", subgraph = "payment-plan-subgraph"),},
+        subgraphs = {@NamedSubgraph(name = "payment-plan-subgraph", attributeNodes = {@NamedAttributeNode("netAmount"), @NamedAttributeNode("taxAmount"), @NamedAttributeNode("grossAmount"), @NamedAttributeNode("currency"), @NamedAttributeNode("duration")})})
 @Entity
 @Table(name = "payment_method")
 @Data

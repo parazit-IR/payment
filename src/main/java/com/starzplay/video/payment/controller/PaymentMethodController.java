@@ -32,10 +32,10 @@ public class PaymentMethodController extends BaseController {
         if (name == null && id == null)
             return success(paymentMethodService.list());
         else if (name != null && id == null)
-            return success(paymentMethodService.filter(name));
+            return success(paymentMethodService.filterByName(name));
         else if (name == null && id != null) {
             try {
-                return success(paymentMethodService.filter(id));
+                return success(paymentMethodService.filterById(id));
             } catch (Exception e) {
                 return failure(e);
             }

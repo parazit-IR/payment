@@ -5,11 +5,17 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.starzplay.video.payment.config.MoneySerializer;
 import com.starzplay.video.payment.enums.Currency;
 import com.starzplay.video.payment.enums.Duration;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentPlanSlimModel {
 
     private Long id;
