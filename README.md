@@ -1,10 +1,13 @@
 # payment
 
-Commanf for build
-    mvn clean package -Dmaven.test.skip
+Command for build without test cases = mvn clean install -Dmaven.test.skip
 
-Change dir
-    cd target
+Command for build with test cases = mvn clean install
 
-Command for run
-    java -jar payment.jar
+Run with docker and jib = mvn compile com.google.cloud.tools:jib-maven-plugin:2.5.0:build -Dimage=payment
+
+Run with docker and jib (add plugin to pom) = mvn compile jib:build
+
+Run with docker file (in project path) = docker build .
+
+Run with java (cd target) = java -jar payment.jar
